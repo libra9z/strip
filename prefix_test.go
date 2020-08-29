@@ -1,7 +1,7 @@
 package strip
 
 import (
-	"github.com/go-martini/martini"
+	macaron "gopkg.in/macaron.v1"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -17,7 +17,7 @@ func TestStripPrefix(t *testing.T) {
 }
 
 func TestInMartini(t *testing.T) {
-	m := martini.New()
+	m := macaron.New()
 	m.Use(Prefix("/foo"))
 	m.Use(func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path != "/bar" {
@@ -30,7 +30,7 @@ func TestInMartini(t *testing.T) {
 }
 
 func TestInRequestContext(t *testing.T) {
-	m := martini.Classic()
+	m := macaron.Classic()
 	m.Get("/foo/bar", Prefix("/foo"), func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path != "/bar" {
 			t.Fatalf("Strip Prefix Failed")

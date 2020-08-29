@@ -3,13 +3,13 @@
 package strip
 
 import (
-	"github.com/go-martini/martini"
+	"gopkg.in/macaron.v1"
 	"net/http"
 	"strings"
 )
 
 // strip Prefix for every incoming http request
-func Prefix(prefix string) martini.Handler {
+func Prefix(prefix string) macaron.Handler {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if prefix == "" {
 			return
